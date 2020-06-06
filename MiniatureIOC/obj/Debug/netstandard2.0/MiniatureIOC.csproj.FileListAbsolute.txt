@@ -1,8 +1,0 @@
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\bin\Debug\netstandard2.0\MiniatureIOC.deps.json
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\bin\Debug\netstandard2.0\MiniatureIOC.dll
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\bin\Debug\netstandard2.0\MiniatureIOC.pdb
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\obj\Debug\netstandard2.0\MiniatureIOC.csprojAssemblyReference.cache
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\obj\Debug\netstandard2.0\MiniatureIOC.AssemblyInfoInputs.cache
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\obj\Debug\netstandard2.0\MiniatureIOC.AssemblyInfo.cs
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\obj\Debug\netstandard2.0\MiniatureIOC.dll
-C:\Users\Josh\PropertyMeProjects\MePay\MiniatureIOC\obj\Debug\netstandard2.0\MiniatureIOC.pdb

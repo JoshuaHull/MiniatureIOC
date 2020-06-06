@@ -1,0 +1,8 @@
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\bin\Debug\netcoreapp3.1\MiniatureIOC.deps.json
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\bin\Debug\netcoreapp3.1\MiniatureIOC.dll
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\bin\Debug\netcoreapp3.1\MiniatureIOC.pdb
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\obj\Debug\netcoreapp3.1\MiniatureIOC.csprojAssemblyReference.cache
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\obj\Debug\netcoreapp3.1\MiniatureIOC.AssemblyInfoInputs.cache
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\obj\Debug\netcoreapp3.1\MiniatureIOC.AssemblyInfo.cs
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\obj\Debug\netcoreapp3.1\MiniatureIOC.dll
+C:\Users\Josh\VisualStudioProjects\MiniatureIOC\MiniatureIOC\MiniatureIOC\obj\Debug\netcoreapp3.1\MiniatureIOC.pdb
