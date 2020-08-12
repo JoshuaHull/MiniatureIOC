@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MiniatureIOC.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,9 +7,7 @@ namespace MiniatureIOC
 {
     public class MiniIOCHandler
     {
-        private string AssemblyRegex { get; set; }
-
-        private string NamespaceRegex { get; set; }
+        private IEnumerable<Assembly> Assemblies { get; set; }
 
         public IServiceCollection Services { get; private set; }
 
@@ -18,36 +15,23 @@ namespace MiniatureIOC
 
         internal IEnumerable<Type> AllTypes { get; set; }
 
-        public MiniIOCHandler(string assemblyRegex=null, string namespaceRegex=null, IServiceCollection initialServices=null)
+        public MiniIOCHandler(IServiceCollection initialServices = null, params Assembly[] assemblies)
         {
-            this.AssemblyRegex = assemblyRegex ?? ".*";
-            this.NamespaceRegex = namespaceRegex ?? ".*";
+            this.Assemblies = assemblies ?? new Assembly[] { };
             this.Services = initialServices ?? new ServiceCollection();
         }
 
-        #region VIRTUAL METHODS
-
         public virtual void LoadDependencies()
         {
-            this.AllTypes = Enumerators.GetTypesMatchingNamespaceRegex(
-                Enumerators.GetTypesFromAllAssembliesMatchingRegex(this.AssemblyRegex),
-                this.NamespaceRegex
-            );
+            this.AllTypes = this.Assemblies?.GetTypesWithAttribute<MiniIOCDependencyAttribute>();
 
-            this.LoadDependencies(this.GetTypesWithMiniIOCDependencyAttribute());
+            foreach (var t in this.AllTypes)
+                foreach (MiniIOCDependencyAttribute d in t.GetCustomAttributes(typeof(MiniIOCDependencyAttribute), true))
+                    d.ServiceType.InvokeServiceMethod(this.Services, d.InterfaceType, d.ConcreteClass);
         }
 
         public virtual void BuildServiceProvider()
             => this.ServiceProvider = this.Services.BuildServiceProvider();
-
-        #endregion
-
-        public void LoadDependencies(List<Type> types)
-        {
-            foreach (var type in types)
-                foreach (MiniIOCDependencyAttribute dependency in type.GetCustomAttributes(typeof(MiniIOCDependencyAttribute), true))
-                    dependency.ServiceType.InvokeServiceMethod(this.Services, dependency.InterfaceType, dependency.ConcreteClass);
-        }
 
         public virtual void ResolveServicesFor(object resolveOn)
         {
@@ -77,12 +61,5 @@ namespace MiniatureIOC
                 }
             }
         }
-
-        #region PRIVATE METHODS
-
-        private List<Type> GetTypesWithMiniIOCDependencyAttribute()
-            => Enumerators.GetTypesWithAttribute<MiniIOCDependencyAttribute>(this.AllTypes);
-
-        #endregion
     }
 }
