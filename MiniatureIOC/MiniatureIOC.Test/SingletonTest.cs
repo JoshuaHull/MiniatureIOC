@@ -18,10 +18,10 @@ namespace MiniatureIOC.Test
             RHomer homer1 = new RHomer();
             RHomer homer2 = new RHomer();
 
-            var iocHandler = new MiniIOCHandler("MiniatureIOC.Test", ".*SingletonTestClasses");
+            var iocHandler = new MiniIOCHandler(assemblies: typeof(SingletonTest).Assembly);
 
             iocHandler.Load().Build().ResolveFor(homer1);
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
             iocHandler.ResolveFor(homer2);
 
             Assert.IsNotNull(homer1.Beer);
