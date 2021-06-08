@@ -15,20 +15,20 @@ namespace MiniatureIOC.Extensions
             if (types.Length == 0) return services;
 
             var typeRegistrations = types
-            .Select(t => t.Assembly)
-            .GetTypesWithAttribute<MiniIOCDependencyAttribute>()
-            .Select(concreteType => new {
-                concreteType,
-                attributes = concreteType.GetCustomAttributes(typeof(MiniIOCDependencyAttribute), true),
-            });
+                .Select(t => t.Assembly)
+                .GetTypesWithAttribute<MiniIOCDependencyAttribute>()
+                .Select(concreteType => new {
+                    concreteType,
+                    attributes = concreteType.GetCustomAttributes(typeof(MiniIOCDependencyAttribute), true),
+                });
 
             foreach (var typeRegistration in typeRegistrations)
-            foreach (MiniIOCDependencyAttribute attribute in typeRegistration.attributes)
-                attribute.Lifetime.InvokeServiceMethod(
-                services,
-                attribute.ServiceType ?? typeRegistration.concreteType,
-                attribute.ConcreteType ?? typeRegistration.concreteType
-                );
+                foreach (MiniIOCDependencyAttribute attribute in typeRegistration.attributes)
+                    attribute.Lifetime.InvokeServiceMethod(
+                        services,
+                        attribute.ServiceType ?? typeRegistration.concreteType,
+                        attribute.ConcreteType ?? typeRegistration.concreteType
+                    );
 
             return services;
         }

@@ -7,6 +7,7 @@ namespace MiniatureIOC
     public enum Lifetime
     {
         Transient,
+        Scoped,
         Singleton,
     }
 
@@ -15,6 +16,7 @@ namespace MiniatureIOC
         public static string GetAddServiceMethodName(this Lifetime serviceType) => serviceType switch
         {
             Lifetime.Transient => nameof(ServiceCollectionServiceExtensions.AddTransient),
+            Lifetime.Scoped => nameof(ServiceCollectionServiceExtensions.AddScoped),
             Lifetime.Singleton => nameof(ServiceCollectionServiceExtensions.AddSingleton),
             _ => throw new NotImplementedException(),
         };

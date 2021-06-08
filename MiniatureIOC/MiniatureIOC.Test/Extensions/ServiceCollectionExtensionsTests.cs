@@ -21,7 +21,7 @@ namespace MiniatureIOC.Test.Extensions
         public void Should_Add_All_Types_From_Assembly_With_Attribute()
         {
             // Assert
-            ServiceCollection.Count.ShouldBe(2);
+            ServiceCollection.Count.ShouldBe(3);
         }
 
         [Test]
@@ -61,6 +61,20 @@ namespace MiniatureIOC.Test.Extensions
 
             // Assert
             interfaceRegistrationInstance.ShouldBeNull();
+        }
+
+        [Test]
+        public void Should_Register_SingletonRegistration_As_Singleton()
+        {
+            // Arrange
+            var sp = ServiceCollection.BuildServiceProvider();
+
+            // Act
+            var first = sp.GetService<SingletonRegistration>();
+            var second = sp.GetService<SingletonRegistration>();
+
+            // Assert
+            first.CreatedOn.ShouldBe(second.CreatedOn);
         }
     }
 }
