@@ -12,7 +12,6 @@ namespace MiniatureIOC
         ) =>
             assemblies
                 .SelectMany(a => a.GetTypes())
-                .Where(t => t.GetCustomAttributes(typeof(Attribute), true).Length > 0)
-                .Select(t => t);
+                .Where(t => t.GetCustomAttributes(typeof(Attribute), true).Length > 0);
     }
 }
