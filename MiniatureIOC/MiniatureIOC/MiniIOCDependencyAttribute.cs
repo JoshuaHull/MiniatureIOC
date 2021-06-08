@@ -5,28 +5,34 @@ namespace MiniatureIOC
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MiniIOCDependencyAttribute: Attribute
     {
-        public ServiceType ServiceType { get; private set; }
+        public Lifetime Lifetime { get; private set; }
 
-        public Type ConcreteClass { get; private set; }
+        public Type? ConcreteType { get; private set; }
 
-        public Type InterfaceType { get; private set; }
+        public Type? ServiceType { get; private set; }
 
         public MiniIOCDependencyAttribute(
-            Type myInterface,
-            ServiceType serviceType=MiniatureIOC.ServiceType.Transient
+            Lifetime lifetime = Lifetime.Transient
         ) {
-            this.InterfaceType = myInterface;
-            this.ServiceType = serviceType;
+            Lifetime = lifetime;
         }
 
         public MiniIOCDependencyAttribute(
             Type myInterface,
-            Type concreteClass,
-            ServiceType serviceType=MiniatureIOC.ServiceType.Transient
+            Lifetime lifetime = Lifetime.Transient
         ) {
-            this.ConcreteClass = concreteClass;
-            this.InterfaceType = myInterface;
-            this.ServiceType = serviceType;
+            ServiceType = myInterface;
+            Lifetime = lifetime;
+        }
+
+        public MiniIOCDependencyAttribute(
+            Type serviceType,
+            Type concreteType,
+            Lifetime lifetime = Lifetime.Transient
+        ) {
+            ConcreteType = concreteType;
+            ServiceType = serviceType;
+            Lifetime = lifetime;
         }
     }
 }
