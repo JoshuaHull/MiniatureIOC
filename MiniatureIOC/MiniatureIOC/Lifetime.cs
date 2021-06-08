@@ -12,7 +12,7 @@ namespace MiniatureIOC
 
     static class LifetimeExtensions
     {
-        public static string GetAddServiceMethod(this Lifetime serviceType) => serviceType switch
+        public static string GetAddServiceMethodName(this Lifetime serviceType) => serviceType switch
         {
             Lifetime.Transient => nameof(ServiceCollectionServiceExtensions.AddTransient),
             Lifetime.Singleton => nameof(ServiceCollectionServiceExtensions.AddSingleton),
@@ -21,18 +21,18 @@ namespace MiniatureIOC
 
         public static MethodInfo? GetServiceMethod(this Lifetime serviceType)
             => typeof(ServiceCollectionServiceExtensions).GetMethod(
-                serviceType.GetAddServiceMethod(),
+                serviceType.GetAddServiceMethodName(),
                 new[] {typeof(IServiceCollection), typeof(Type), typeof(Type)}
             );
 
         public static object? InvokeServiceMethod(
-            this Lifetime serviceType,
+            this Lifetime lifetime,
             IServiceCollection services,
-            Type interfaceType,
-            Type concreteClass
+            Type serviceType,
+            Type concreteType
         ) {
-            return serviceType.GetServiceMethod()?.Invoke(
-                services, new object[] { services, interfaceType, concreteClass }
+            return lifetime.GetServiceMethod()?.Invoke(
+                services, new object[] { services, serviceType, concreteType }
             );
         }
     }

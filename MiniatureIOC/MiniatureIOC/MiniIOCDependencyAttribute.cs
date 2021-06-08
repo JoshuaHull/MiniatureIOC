@@ -18,10 +18,10 @@ namespace MiniatureIOC
         }
 
         public MiniIOCDependencyAttribute(
-            Type myInterface,
+            Type serviceType,
             Lifetime lifetime = Lifetime.Transient
         ) {
-            ServiceType = myInterface;
+            ServiceType = serviceType;
             Lifetime = lifetime;
         }
 
