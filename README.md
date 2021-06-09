@@ -20,6 +20,19 @@ MiniatureIOC is not a Dependency Injection container. Instead, it integrates wit
 
 # Usage
 
+### Startup.cs
+
+```C#
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMiniIOCDependenciesFromAssembliesContaining(
+      typeof(TypeFromSomeProject), typeof(TypeFromAnotherProject)
+    );
+}
+```
+
+Then place the MiniIOCDependency attribute above each of your services as follows:
+
 ### Add a service without specifying an interface
 
 ```C#
