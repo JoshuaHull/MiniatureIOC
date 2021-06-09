@@ -1,12 +1,6 @@
-
 *.ide
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
 
-MiniatureIOC/.vs/MiniatureIOC/v16/
-
-MiniatureIOC/MiniatureIOC/obj/
-
-MiniatureIOC/MiniatureIOC.Test/obj/
-
-MiniatureIOC/MiniatureIOC.Test/bin/
-
-MiniatureIOC/MiniatureIOC/bin/
