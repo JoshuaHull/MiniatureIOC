@@ -38,6 +38,20 @@ namespace MiniatureIOC.Test.Extensions
         }
 
         [Test]
+        public void Should_Register_BasicRegistration_As_Transient_By_Default()
+        {
+            // Arrange
+            var sp = ServiceCollection.BuildServiceProvider();
+
+            // Act
+            var first = sp.GetService<BasicRegistration>();
+            var second = sp.GetService<BasicRegistration>();
+
+            // Assert
+            first.CreatedOn.ShouldNotBe(second.CreatedOn);
+        }
+
+        [Test]
         public void Should_Register_InterfaceRegistration_As_Interface()
         {
             // Arrange
