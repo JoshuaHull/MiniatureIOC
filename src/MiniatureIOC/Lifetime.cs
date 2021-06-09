@@ -11,7 +11,7 @@ namespace MiniatureIOC
         Singleton,
     }
 
-    static class LifetimeExtensions
+    public static class LifetimeExtensions
     {
         public static string GetAddServiceMethodName(this Lifetime serviceType) => serviceType switch
         {
