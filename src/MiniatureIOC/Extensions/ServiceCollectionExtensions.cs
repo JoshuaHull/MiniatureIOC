@@ -15,8 +15,9 @@ namespace MiniatureIOC.Extensions
             if (types.Length == 0) return services;
 
             var typeRegistrations = types
-                .Select(t => t.Assembly)
-                .GetTypesWithAttribute<MiniIOCDependencyAttribute>()
+                .Select(Assembly)
+                .SelectMany(Types)
+                .Where(HaveMiniIOCAttribute)
                 .Select(concreteType => new {
                     concreteType,
                     attributes = concreteType.GetCustomAttributes(typeof(MiniIOCDependencyAttribute), true),
@@ -32,15 +33,14 @@ namespace MiniatureIOC.Extensions
 
             return services;
         }
-    }
 
-    internal static class IEnumerableExtensions
-    {
-        public static IEnumerable<Type> GetTypesWithAttribute<Attribute>(
-            this IEnumerable<Assembly> assemblies
-        ) =>
-            assemblies
-                .SelectMany(a => a.GetTypes())
-                .Where(t => t.GetCustomAttributes(typeof(Attribute), true).Length > 0);
+        private static Func<Type, Assembly> Assembly =>
+            type => type.Assembly;
+
+        private static Func<Assembly, IEnumerable<Type>> Types =>
+            assembly => assembly.GetTypes();
+
+        private static Func<Type, bool> HaveMiniIOCAttribute =>
+            type => type.GetCustomAttributes(typeof(MiniIOCDependencyAttribute), true).Length > 0;
     }
 }

@@ -5,11 +5,11 @@ namespace MiniatureIOC
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MiniIOCDependencyAttribute: Attribute
     {
-        public Lifetime Lifetime { get; private set; }
+        public Lifetime Lifetime { get; }
 
-        public Type? ConcreteType { get; private set; }
+        public Type? ConcreteType { get; }
 
-        public Type? ServiceType { get; private set; }
+        public Type? ServiceType { get; }
 
         public MiniIOCDependencyAttribute(
             Lifetime lifetime = Lifetime.Transient
@@ -30,8 +30,8 @@ namespace MiniatureIOC
             Type concreteType,
             Lifetime lifetime = Lifetime.Transient
         ) {
-            ConcreteType = concreteType;
             ServiceType = serviceType;
+            ConcreteType = concreteType;
             Lifetime = lifetime;
         }
     }
